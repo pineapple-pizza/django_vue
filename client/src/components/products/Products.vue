@@ -24,9 +24,6 @@
           </v-card>
         </v-col>
       </v-row>
-      <!-- <v-row align="center" justify="center">
-
-      </v-row> -->
     </v-parallax>
   </div>
 </template>
@@ -42,7 +39,6 @@ export default {
   },
   data() {
     return {
-      text: "test search",
     };
   },
   computed: {

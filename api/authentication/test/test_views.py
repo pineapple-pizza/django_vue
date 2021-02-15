@@ -28,7 +28,5 @@ class TestViews(TestSetUp):
         user.save()
         res = self.client.post(self.login_url, self.user_data, format="json")
         
-        # res = self.client.force_login(self.user_data)
-        # res_prod = self.client.get(self.products_url, format="json")
         self.assertEqual(res.status_code, 200)
         

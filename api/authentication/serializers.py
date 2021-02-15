@@ -2,13 +2,10 @@ from rest_framework import serializers
 from authentication.models import User
 from django.contrib import auth
 from rest_framework.exceptions import AuthenticationFailed
-
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta: 
-#         model = User
-#         fields = '__all__'
         
 class RegisterSerializer(serializers.ModelSerializer):
+    """ serializers for registration """
+    
     password = serializers.CharField(max_length=68, min_length=6, write_only=True)
     
     class Meta:
@@ -16,6 +13,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ['email', 'username', 'password']
         
     def validate(self, attrs): 
+        """ method to validate user informations """
         email = attrs.get('email', '')
         username = attrs.get('username', '')
         
@@ -25,9 +23,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         return attrs
     
     def create(self, validated_data):
+        """ create method that is called when we use serializer.save() """
         return User.objects.create_user(**validated_data)
     
 class EmailVerificationSerializer(serializers.ModelSerializer):
+    """ email verification serializers """
     token = serializers.CharField(max_length=555)
     
     class Meta:
@@ -35,6 +35,8 @@ class EmailVerificationSerializer(serializers.ModelSerializer):
         fields = ['token']
 
 class LoginSerialiser(serializers.ModelSerializer):
+    """ login serializers """
+    
     email = serializers.EmailField(max_length=255, min_length=3)
     password = serializers.CharField(max_length=68, min_length=6, write_only=True)
     username = serializers.CharField(max_length=255, min_length=3, read_only=True)
@@ -45,6 +47,8 @@ class LoginSerialiser(serializers.ModelSerializer):
         fields = ['email', 'password', 'username', 'tokens']
     
     def validate(self, attrs):
+        """ method to validate user informations """
+                
         email = attrs.get('email', '')
         password = attrs.get('password', '')
         

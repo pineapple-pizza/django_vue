@@ -7,6 +7,7 @@ class Command(BaseCommand):
     help = 'display all products'
 
     def add_products(self):
+        """ populating db """
         
         url = 'https://fr-en.openfoodfacts.org/category/pizza.json'
         response = requests.get(url)

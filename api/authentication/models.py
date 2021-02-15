@@ -3,20 +3,20 @@ from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, Permi
 from rest_framework_simplejwt.tokens import RefreshToken
 import json
 
-# Create your models here.
-
 class UserManager(BaseUserManager):
+    """which query sets we can run """
     def create_user(self, username, email, password=None):
         if username is None:
-            raise TypeError('Please provide a username')
+            raise TypeError('Please provide an username')
         if email is None:
-            raise TypeError('Please provide a email')
+            raise TypeError('Please provide an email')
         user=self.model(username=username, email=self.normalize_email(email))
         user.set_password(password)
         user.save()
         return user
         
     def create_superuser(self, username, email, password=None):
+        """creating super user with the create_user method"""
         if password is None:
             raise TypeError('Password can not be none')
         
@@ -27,6 +27,7 @@ class UserManager(BaseUserManager):
         return user
     
 class User(AbstractBaseUser, PermissionsMixin):
+    """model class"""
     username = models.CharField(max_length=100, unique = True, db_index=True)
     email = models.EmailField(max_length=100, unique = True)
     is_verified = models.BooleanField(default=False)

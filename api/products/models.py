@@ -1,9 +1,8 @@
 from django.db import models
 from authentication.models import User
 
-# Create your models here.
-
 class Product(models.Model):
+    """ product model """
     
     CATEGORY_OPTIONS = [
         ('sauces', 'sauces'),

@@ -112,6 +112,7 @@ export default {
   }),
   methods: {
     async signin() {
+      // registration method
       const res = await axios.post("api/register/", {
         email: this.email,
         username: this.username,

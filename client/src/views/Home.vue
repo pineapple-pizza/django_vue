@@ -19,7 +19,7 @@ export default {
     "contact": Contact
   },
   created() {
-    // const res = await axios.get()
+
   }
 }
 </script>

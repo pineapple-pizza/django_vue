@@ -6,9 +6,8 @@ from rest_framework import permissions
 from .permissions import IsOwner
 from rest_framework.filters import SearchFilter, OrderingFilter
 
-# Create your views here.
-
 class ProductListAPIView(ListCreateAPIView):
+    """ products class CRUD methods"""
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
@@ -22,6 +21,7 @@ class ProductListAPIView(ListCreateAPIView):
         return self.queryset.filter(owner = self.request.user)
     
 class ProductDetailAPIView(RetrieveUpdateDestroyAPIView):
+    """ on product by id """
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
     permission_classes = (permissions.IsAuthenticated, IsOwner,)
